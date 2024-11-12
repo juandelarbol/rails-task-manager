@@ -1,14 +1,24 @@
 <h1>Index</h1>
+
 <% @tasks.each do |task| %>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="" checked>
-  <label class="form-check-label" for="">
+<div class="task-item">
+  <div class="task-info">  
+      <% if task.completed %>
+        <p class="task-status">[v]</p>  
+      <% else %>
+        <p class="task-status">[ ]</p>  
+      <% end %>
     <%= link_to task.title, task_path(task) %>  
-  </label>
+  </div>
+<div class="task-action delete-link">
+  <%= link_to "Delete", task_path(task),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+</div>
 
 </div>
 
 <% end %>
-  <p><%= link_to "Create task", tasks_new_path %></p>
+  <p><%= link_to "> Create task", tasks_new_path %></p>
 
 
